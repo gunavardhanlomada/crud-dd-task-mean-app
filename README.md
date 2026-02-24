@@ -1,6 +1,6 @@
-# 📦 CRUD MEAN Application – Dockerized with CI/CD
+# CRUD MEAN Application – Dockerized with CI/CD
 
-## 🚀 Project Overview
+## Project Overview
 
 This project demonstrates a fully containerized **MEAN Stack (MongoDB, Express, Angular, Node.js)** CRUD application deployed on a cloud-based Ubuntu VM using:
 
@@ -14,7 +14,7 @@ The entire application is accessible via **Port 80** using Nginx.
 
 ---
 
-# 🏗 Architecture Overview
+# Architecture Overview
 
 ```
 Developer Push to GitHub
@@ -36,7 +36,7 @@ Frontend → Backend → MongoDB
 
 ---
 
-# 🐳 Docker Configuration
+# Docker Configuration
 
 ## Services Included
 
@@ -49,7 +49,7 @@ Frontend → Backend → MongoDB
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```
 crud-dd-task-mean-app/
@@ -73,9 +73,9 @@ crud-dd-task-mean-app/
 
 ---
 
-# ⚙️ Local Setup Instructions
+# Local Setup Instructions
 
-## 1️⃣ Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/<your-username>/crud-dd-task-mean-app.git
@@ -84,7 +84,7 @@ cd crud-dd-task-mean-app
 
 ---
 
-## 2️⃣ Install Docker & Docker Compose (Ubuntu)
+## Install Docker & Docker Compose (Ubuntu)
 
 ```bash
 sudo apt update
@@ -93,7 +93,7 @@ sudo apt install docker.io docker-compose -y
 
 ---
 
-## 3️⃣ Run Application
+## Run Application
 
 ```bash
 docker-compose up -d
@@ -102,12 +102,12 @@ docker-compose up -d
 Application will be available at:
 
 ```
-http://34.121.93.182
+http://<PUBLIC_IP_ADDRESS>
 ```
 
 ---
 
-# 🗄 MongoDB Configuration
+# MongoDB Configuration
 
 - Version: MongoDB 7  
 - Healthcheck enabled  
@@ -121,7 +121,7 @@ No `localhost` is used inside containers.
 
 ---
 
-# 🌐 Nginx Reverse Proxy
+# Nginx Reverse Proxy
 
 Configured to expose the entire application via port 80.
 
@@ -139,7 +139,7 @@ nginx/default.conf
 
 ---
 
-# 🔁 CI/CD Pipeline (GitHub Actions)
+# CI/CD Pipeline (GitHub Actions)
 
 Workflow file location:
 
@@ -162,7 +162,7 @@ This ensures automatic deployment on every push.
 
 ---
 
-# 🔐 GitHub Secrets Used
+# GitHub Secrets Used
 
 Configured in:
 
@@ -178,9 +178,9 @@ No sensitive information is stored in the repository.
 
 ---
 
-# ☁️ Infrastructure Details
+# Infrastructure Details
 
-- Ubuntu Virtual Machine (Cloud-based)
+- Ubuntu/debian Virtual Machine (Cloud-based)
 - Docker Engine
 - Docker Compose
 - MongoDB (Containerized)
@@ -215,9 +215,10 @@ The repository includes screenshots demonstrating:
 
 ---
 
-# ✅ Application Access
+# Application Access
 
 After deployment, open:
+Public IP Address
 
 ```
 http://34.121.93.182
