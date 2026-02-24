@@ -1,27 +1,224 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# 📦 CRUD MEAN Application – Dockerized with CI/CD
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+## 🚀 Project Overview
 
-## Project setup
+This project demonstrates a fully containerized **MEAN Stack (MongoDB, Express, Angular, Node.js)** CRUD application deployed on a cloud-based Ubuntu VM using:
 
-### Node.js Server
+- Docker & Docker Compose  
+- Nginx Reverse Proxy  
+- Cloud Ubuntu Virtual Machine  
+- GitHub Actions CI/CD Pipeline  
+- Docker Hub Image Registry  
 
-cd backend
+The entire application is accessible via **Port 80** using Nginx.
 
-npm install
+---
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+# 🏗 Architecture Overview
 
-Run `node server.js`
+```
+Developer Push to GitHub
+        ↓
+GitHub Actions CI/CD
+        ↓
+Build Docker Images
+        ↓
+Push to Docker Hub
+        ↓
+SSH into Ubuntu VM
+        ↓
+Docker Compose Pull & Restart
+        ↓
+Nginx (Port 80)
+        ↓
+Frontend → Backend → MongoDB
+```
 
-### Angular Client
+---
 
-cd frontend
+# 🐳 Docker Configuration
 
-npm install
+## Services Included
 
-Run `ng serve --port 8081`
+| Service   | Description |
+|-----------|------------|
+| mongodb   | MongoDB 7 container with healthcheck |
+| backend   | Node.js + Express REST API |
+| frontend  | Angular application |
+| nginx     | Reverse proxy exposed on port 80 |
 
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
+---
 
-Navigate to `http://localhost:8081/`
+# 📁 Project Structure
+
+```
+crud-dd-task-mean-app/
+│
+├── backend/
+│   └── Dockerfile
+│
+├── frontend/
+│   └── Dockerfile
+│
+├── nginx/
+│   └── default.conf
+│
+├── docker-compose.yml
+│
+├── .github/workflows/
+│   └── main.yml
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Local Setup Instructions
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/<your-username>/crud-dd-task-mean-app.git
+cd crud-dd-task-mean-app
+```
+
+---
+
+## 2️⃣ Install Docker & Docker Compose (Ubuntu)
+
+```bash
+sudo apt update
+sudo apt install docker.io docker-compose -y
+```
+
+---
+
+## 3️⃣ Run Application
+
+```bash
+docker-compose up -d
+```
+
+Application will be available at:
+
+```
+http://34.121.93.182
+```
+
+---
+
+# 🗄 MongoDB Configuration
+
+- Version: MongoDB 7  
+- Healthcheck enabled  
+- Backend connects using:
+
+```
+mongodb://mongodb:27017/cruddb
+```
+
+No `localhost` is used inside containers.
+
+---
+
+# 🌐 Nginx Reverse Proxy
+
+Configured to expose the entire application via port 80.
+
+### Routing:
+
+- `/` → Frontend  
+- `/api` → Backend  
+
+Configuration file:
+
+```
+nginx/default.conf
+```
+
+
+---
+
+# 🔁 CI/CD Pipeline (GitHub Actions)
+
+Workflow file location:
+
+```
+.github/workflows/deploy.yml
+```
+
+## Pipeline Steps
+
+1. Triggered on push to `main`
+2. Login to Docker Hub using Access Token
+3. Build backend image
+4. Build frontend image
+5. Push images to Docker Hub
+6. SSH into Ubuntu VM
+7. Pull latest images
+8. Restart containers using Docker Compose
+
+This ensures automatic deployment on every push.
+
+---
+
+# 🔐 GitHub Secrets Used
+
+Configured in:
+
+GitHub Repository → Settings → Secrets
+
+- DOCKER_USERNAME
+- DOCKER_PASSWORD (Docker Hub Access Token)
+- VM_HOST
+- VM_USER
+- SSH_PRIVATE_KEY
+
+No sensitive information is stored in the repository.
+
+---
+
+# ☁️ Infrastructure Details
+
+- Ubuntu Virtual Machine (Cloud-based)
+- Docker Engine
+- Docker Compose
+- MongoDB (Containerized)
+- Nginx Reverse Proxy
+- GitHub Actions CI/CD
+- Docker Hub Registry
+
+---
+
+# 🛠 Production Best Practices Implemented
+
+- MongoDB healthcheck configured
+- Backend waits for database readiness
+- Reverse proxy setup for unified access
+- Environment variables used for configuration
+- SSH key-based secure deployment
+- Docker Hub Access Token used instead of password
+
+---
+
+# 📸 Screenshots (Included in Repository)
+
+The repository includes screenshots demonstrating:
+
+- Successful GitHub Actions workflow execution
+- Docker image build and push logs
+- Docker Hub repositories
+- Running containers on VM (`docker ps`)
+- Working application UI in browser
+- Nginx configuration
+- Infrastructure setup
+
+---
+
+# ✅ Application Access
+
+After deployment, open:
+
+```
+http://34.121.93.182
+```
