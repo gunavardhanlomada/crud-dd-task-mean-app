@@ -78,7 +78,7 @@ crud-dd-task-mean-app/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/crud-dd-task-mean-app.git
+git clone https://github.com/gunavardhanlomada/crud-dd-task-mean-app.git
 cd crud-dd-task-mean-app
 ```
 
